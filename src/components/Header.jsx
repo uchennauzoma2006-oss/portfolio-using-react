@@ -6,14 +6,23 @@ export default function Header() {
   const [display, setDisplay] = useState('')
 
   useEffect(() => {
-    let i = 0
-    const interval = setInterval(() => {
-      setDisplay((prev) => prev + chars[i])
-      i += 1
-      if (i >= chars.length) clearInterval(interval)
-    }, 120)
-    return () => clearInterval(interval)
-  }, [])
+    let mounted = true
+    setDisplay('')
+
+    const type = (i = 0) => {
+      if (!mounted) return
+      if (i < chars.length) {
+        // build substring up to current index to avoid missing chars
+        setDisplay(chars.slice(0, i + 1).join(''))
+        setTimeout(() => type(i + 1), 100)
+      }
+    }
+
+    type(0)
+    return () => {
+      mounted = false
+    }
+  }, [fullText])
 
   return (
     <header className="bg-grey shadow-sm">
