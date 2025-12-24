@@ -28,7 +28,7 @@ export default function Header() {
     <header className="bg-grey shadow-sm">
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
          <div className="text-xl font-bold">
-           <span>{display}</span>
+           <span>{display ?? ''}</span>
            <span className="ml-1 inline-block w-1 h-6 align-middle border-r-2 border-current animate-pulse" />
          </div>
         
